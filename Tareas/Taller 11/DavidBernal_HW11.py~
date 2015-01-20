@@ -1,0 +1,94 @@
+import numpy as np
+
+import matplotlib.pyplot as plt
+
+from scipy.stats import *
+
+gotas=100000
+size=10
+
+def puntoa():
+    x=np.zeros(gotas)
+    y=np.zeros(gotas)
+    for i in range(gotas):
+        x[i]=np.random.random()*size
+        y[i]=np.random.random()*size
+    plt.figure(figsize=(8,8))
+    plt.scatter(x,y)
+    plt.xlim([0,10])
+    plt.ylim([0,10])
+    plt.show()
+
+    return x,y
+
+
+x,y=puntoa()
+
+
+#b.
+
+def puntob(a,P):
+
+    N=np.zeros(P)
+    gotas=100000
+    size=10
+    for i in range(P):
+        x0=np.random.random()*size
+        y0=np.random.random()*size
+        
+        if x0+a>size:
+            xmax=x0+a-size
+            condfrontx=1
+        else:
+            xmax=x0+a
+            condfrontx=0
+
+        if y0+a>size:
+            ymax=y0+a-size
+            condfronty=1
+        else:
+            ymax=y0+a
+            condfronty=0
+
+        if (condfrontx==1)&(condfronty==1):
+            for j in range(len(x)):
+                if ((x0<x[j]<size)|(0<x[j]<xmax))&((y0<y[j]<size)|(0<y[j]<ymax)):
+                                          N[i]+=1
+        if (condfrontx==1)&(condfronty==0):
+            for j in range(len(x)):
+                if ((x0<x[j]<size)|(0<x[j]<xmax))&(y0<y[j]<ymax):
+                                          N[i]+=1
+
+        if (condfrontx==0)&(condfronty==1):
+            for j in range(len(x)):
+                if (x0<x[j]<xmax)&((y0<y[j]<size)|(0<y[j]<ymax)):
+                                          N[i]+=1
+        if (condfrontx==0)&(condfronty==0):
+            for j in range(len(x)):
+                if (x0<x[j]<xmax)&(y0<y[j]<ymax):
+                                          N[i]+=1
+    return N
+
+
+a=input("ingrese el valor de a menor a 10")
+while a >=10:
+    a=input("ingrese el valor de a menor a 10")
+P=input("ingrese el valor de P ")
+gotas=100000
+size=10
+N=puntob(a,P)
+
+mu=a**2*(gotas/(size*size))
+k=np.arange(min(N),max(N))
+poisson=poisson.pmf(k,mu)
+
+plt.hist(N,bins=P/2,normed=True,label='Distribución')
+plt.plot(k,poisson,label='Ajuste por Poisson')
+plt.title('Histograma para gotas en areas a*a')
+plt.legend()
+plt.xlabel('Numero de gotas en area a*a')
+plt.ylabel('Frecuencia normalizada')
+plt.grid()
+plt.show()
+
+print "Se tiene una distribucion de Poisson"

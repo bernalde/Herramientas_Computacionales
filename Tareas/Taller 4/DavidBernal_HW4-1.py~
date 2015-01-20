@@ -1,0 +1,5 @@
+number=input('Por favor ingrese su número mágico: ')
+
+
+
+print "Los mútiplos de "+number+" entre 1 y 1000 son:"

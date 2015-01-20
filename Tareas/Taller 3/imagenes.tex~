@@ -1,0 +1,18 @@
+\documentclass[12pt]{article}
+\usepackage[hmargin=2.0cm,vmargin=1cm]{geometry}
+\usepackage{graphicx}
+
+\begin{document}
+
+En la fig. \ref{fig:moon} se muestra la Estaci\'on Espacial Internacional atravesando la Luna.
+
+\begin{figure}[h]
+\center
+\includegraphics[scale=0.2]{ISS_moon.jpg}
+\includegraphics[scale=0.1]{ISS_moon.jpg}
+\includegraphics[scale=0.1,angle=45]{ISS_moon.jpg}
+\caption{International Space Station (ISS), Moon transit}
+\label{fig:moon}
+\end{figure}
+
+\end{document}

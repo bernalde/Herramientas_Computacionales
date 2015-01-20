@@ -1,0 +1,36 @@
+wget https://raw.githubusercontent.com/jngaravitoc/HerramientasComputacionales/master/Homeworks/HW3/ggiro.csv
+
+sed 's/$/\\\\ \\hline/g' ggiro.csv>datos.tex
+sed 's/,/ \&/g' datos.tex>datos1.tex
+sed 's/"//g' datos1.tex>ggiro.tex
+
+rm ggiro.csv datos.tex datos1.tex
+
+emacs table.tex &
+
+printf "%s" "\documentclass[8pt]{article}
+\usepackage[hmargin=2.0cm,vmargin=1cm]{geometry}
+\usepackage{float}
+\begin{document}
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+"> table.tex
+
+cat ggiro.tex>>table.tex
+
+printf "%s" "\end{tabular}
+\end{table}
+\end{document}" >> table.tex
+
+
+latex table.tex
+pdflatex table.tex
+evince table.pdf &
+
+
+
+
+
+

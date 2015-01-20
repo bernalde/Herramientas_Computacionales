@@ -1,0 +1,35 @@
+import numpy as np
+from random import randrange
+
+def strtonum(string):
+    if string=="Piedra":
+        return 1
+    elif string=="Papel":
+        return 2
+    else:
+        return 3
+
+def numtostr(number):
+    if number==1:
+        return "Piedra"
+    elif number==2:
+        return "Papel"
+    else:
+        return "Tijera"
+
+print randrange(1,4)
+
+print "Este codigo es un juego de usted contra la computadora de piedra, papel o tijera"
+user=raw_input("Piedra, Papel o Tijera? ")
+if((user=="Piedra") | (user=="Papel") | (user=="Tijera")):
+    print user
+    usernum=strtonum(user)
+    print usernum
+    pcnum=randrange(1,4)
+    print pcnum
+    pc=numtostr(pcnum)
+    print pc
+else:
+    print "Ustede debe ingresar Piedra, Papel o Tijera con tal de iniciar el juego"
+
+
